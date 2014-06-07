@@ -33,8 +33,8 @@ int main()
 				if(l[j] == n_usuario[i][x]){
 					acertos[i] = acertos[i] + 1;
 				}
-            }
-                if(j == 5)
+            		}
+                	if(j == 5)
 				printf("\nO numero de acetos do usuario %d foi de: %d\n\n",id[i],acertos[i]);
 		}
 	}
