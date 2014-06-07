@@ -1,6 +1,4 @@
 BySir
 =====
-My codes for you
-================
-You can do wath you want with this
-==================================
+My codes for you do what you want
+=================================
