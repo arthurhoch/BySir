@@ -13,7 +13,7 @@ int HP = 0,HPMAX = 0,MP = 0,MPMAX = 0;
 int atk()
 {
     n++;
-    cout << "Ataque numero: ";
+    cout << "Ataque numero: " << n;
 	keybd_event(VK_F1,0,0,0);
 	Sleep(5000);
 	keybd_event(VK_F1,0,0,0);
