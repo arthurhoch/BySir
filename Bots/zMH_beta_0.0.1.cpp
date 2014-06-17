@@ -21,9 +21,9 @@ int atk()
 	keybd_event(VK_TAB,0,0,0);
 	keybd_event(VK_F1,0,0,0);
 	Sleep(5000);
-    keybd_event(VK_F1,0,0,0);
-    keybd_event(VK_F1,0,0,0);
-    keybd_event(VK_F1,0,0,0);
+    	keybd_event(VK_F1,0,0,0);
+    	keybd_event(VK_F1,0,0,0);
+    	keybd_event(VK_F1,0,0,0);
 	Sleep(5000);
 }
 int pot()
