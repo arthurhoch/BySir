@@ -1,3 +1,11 @@
+// Exercicio mega-sema
+// Grupo:
+// Arthur Jahnke Hoch
+// Pedro Henrique Ulmi
+// Guilherme Calderaro
+// Willian Mehler
+
+
 #include <dos.h>
 #include <stdio.h>
 #include <ctime>
@@ -241,6 +249,7 @@ int main()
 	for(int i=0; i < 20; i++)
 		if(Numero_Identificacao[i] != 0)
 			printf("O apostador de ID %d acertou os %d numeros!!!\n",Numero_Identificacao[i], Numero_Acertos[i]);
+	system("pause");
 	return 0;
 }
 
