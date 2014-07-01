@@ -1,0 +1,705 @@
+//+_+_+_+_+_+_+__+__+__+__+__+_+_
+//_+__+_By: "Sir" Arthur_+__+__+_
+//+_+_+_+_+_+_+__+__+__+__+__+_+_
+
+//			:::Obs:::
+//	1- Não foi adicionado "clear" nem "cls", para ser multiplataforma Linux/Windows;
+//	2- Cada metodo é independente pode ser compilado separadamente;
+//	3- A obs 2 pode ser mentira não testei;
+//	4- Muitas coisas foram copiadas de um metodo para o outro pode, logo
+//	pode ter algo errado, não testei todos exercicios só pogramei...
+//	5- Não fiz com capricho :v.
+//	6- Codigo disponivel em ***github.com/arthurhoch/BySir***
+
+#include <stdio.h>
+#include <ctime>
+#include <cstdlib>
+
+int ex1()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int tamanho=10;
+	int m[tamanho][tamanho];
+	int diagonalp[tamanho];
+	int diagonals[tamanho];
+	int t=0;
+	float help=0;
+	double media = 0;
+	double soma=0;
+	int valores_acima[50];
+	int maior = 0;
+	//Zera o vetor "valores_acima", valores acima da diagonal
+	for(int i=0; i<50;i++) valores_acima[i] = 0;
+	//Le os dados
+	printf("randonizar: %d\n",randonizar );
+	if(randonizar == 2){
+		for(int i=0; i<tamanho ;i++){
+			for(int j=0;j<tamanho;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<tamanho ;i++){
+			for(int j=0;j<tamanho;j++){
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<tamanho ;i++){
+		printf("\n");
+		for(int j=0; j<tamanho ;j++){
+			printf("%5d",m[i][j]);
+			//Armzena diagonal principal
+			if(i == j)
+				diagonalp[i] = m[i][j];
+			//Valores acima da diagonal principal
+			if(i < j){
+        		valores_acima[t] = m[i][j];
+        		t++;
+        	}
+		}
+	}
+	//Capta a diagonal secundaria e a soma
+     for(int i=0; i<tamanho; i++)
+        for(int j=0; j<tamanho; j++)
+            if(i+j == tamanho-1){
+                diagonals[i] = m[i][j];
+                soma = soma + m[i][j];
+            }
+    //
+    //Saida de dados
+    //        	
+    printf("\n\nDiagonais principal:");
+	//Escreve diagonal principal
+	printf("\n\n");
+	for(int i=0; i<tamanho ;i++) printf("%3d ",diagonalp[i]);
+	//Escreve diagonal secundaria
+	printf("\n\nDiagonais secundaria:\n\n");
+	for(int i=0; i<tamanho ;i++) printf("%3d ",diagonals[i]);
+	//Soma da diagonal secundaria
+	printf("\n\nSoma da diagonal secundaria: %5.0f\n",soma);
+	//Faz media diagonal secundaria
+	help = tamanho;
+	media = (soma / help);
+	printf("\nA media da diagonal secundaria e: %5.2f", media);
+	//Escreve os valores acima diagonal principal
+	printf("\n\nValores acima da diagonal principal:\n\n");
+	for(int i=0; i<t ;i++){ 
+		printf("%3d ",valores_acima[i]);
+        if(valores_acima[i] > maior)
+        	maior = valores_acima[i];
+    }
+    //Escrever o maior valor acima da diagonal principal
+	printf("\n\n");
+	printf("O maior valor dos valores acima da diagonal principal e: %d\n\n\n",maior);
+    return 0;
+}
+
+int ex2()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int somalimpares=0,somalpares = 0;
+	int m[7][7];
+	if(randonizar == 2){
+		for(int i=0; i<7 ;i++){
+			for(int j=0;j<7;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<7 ;i++){
+			for(int j=0;j<7;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	for(int i=0; i<7 ;i++)
+		for(int j=0; j<7 ;j++){
+			//Soma linhas pares
+			if(i % 2 == 0){
+				somalpares = somalpares + m[i][j];
+			//Soma linhas impares
+			}else
+				somalimpares = somalimpares + m[i][j];
+		}
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<7 ;i++){
+		printf("\n");
+		for(int j=0; j<7 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Saida
+	printf("\n\nA soma dos numeros nas linhas pares: %d \n",somalpares);
+	printf("\nA soma dos numeros nas linhas impares: %d \n\n",somalimpares);
+	return 0;
+}
+
+int ex3()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int m[6][7];
+	double scoluna[7];
+	float mcoluna[7];
+	//Zera o vetor s/m/coluna
+	for (int i = 0; i < 7; ++i){ mcoluna[i] = 0; scoluna[i] = 0;}
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<6 ;i++){
+			for(int j=0;j<7;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<6 ;i++){
+			for(int j=0;j<7;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	//Armzena as colunas
+	for(int i=0; i<6 ;i++){
+		for(int j=0; j<7 ;j++){
+		scoluna[j] = scoluna[j] + m[i][j];
+		}
+	}
+	//Desenha a tabela e calcula a media
+	printf("\nTabela: \n");
+	for(int i=0; i<6 ;i++){
+		printf("\n");
+		for(int j=0; j<7 ;j++){
+			printf("%5d",m[i][j]);
+			mcoluna[j] = scoluna[j] / 6;
+		}
+	}
+	printf("\n\n");
+
+	//Escreve a media de cada coluna
+	for(int i=0; i<7 ;i++) printf("\nA media da coluna %d foi de %f\n",i+1,mcoluna[i]);
+
+	printf("\n\n");
+}
+
+int ex4()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int m[7][6];
+	float vetorsoma[7];
+	float media[7];
+	for(int i=0; i<7 ;i++){ vetorsoma[i] = 0; media[i] = 0;}
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<7 ;i++){
+			for(int j=0;j<6;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<7 ;i++){
+			for(int j=0;j<6;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	for(int i=0; i<7 ;i++){
+		for(int j=0; j<6 ;j++){
+			vetorsoma[i] = vetorsoma[i] + m[i][j];
+		}
+	}
+	
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<7 ;i++){
+		printf("\n");
+		for(int j=0; j<6 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Calcula a media
+	for(int i=0; i<7 ;i++){ media[i] = vetorsoma[i]/6;}
+	for(int i=0; i<7 ;i++){ 
+		//printf("\n\nA soma da linha %d foi de %f\n",i+1,vetorsoma[i]);
+		printf("\n\nA media da linha %d foi de %f\n",i+1,media[i]);}
+	printf("\n\n");
+}
+
+int ex5()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	float m[5][10];
+	float soma=0;
+	float media=0;
+	int contador = 0;
+	float VET_MAIORES[50];
+	//Zera VET_MAIORES
+	for(int i=0; i< 50; i++) VET_MAIORES[i] = 0;
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<10;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%f",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<10;j++){
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	
+	for(int i=0; i<5 ;i++){
+		for(int j=0; j<10 ;j++){
+			soma = soma + m[i][j];
+		}
+	}
+	media = soma / 50;
+	printf("Media: %d\n",media );
+	for(int i=0; i<5 ;i++){
+		for(int j=0; j<10 ;j++){
+			if (m[i][j] > media){
+				VET_MAIORES[contador] = m[i][j];
+				contador++;
+			}
+
+		}
+	}
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<10 ;j++){
+			printf("%5.0f",m[i][j]);
+		}
+	}
+	printf("\n\nValores acima da media: \n\n");
+	for(int i=0; i<contador ;i++) printf("%5.0f\t",VET_MAIORES[i]);
+	printf("\n\n");
+	
+}
+
+int ex6()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int m[5][5];
+	float somapares =0, somaimpares =0;
+	float mediapares =0, mediaimpares =0;
+	float contapares =0, contaimpares =0;
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<5;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<5;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	for(int i=0; i<5 ;i++)
+		for(int j=0; j<5 ;j++){
+			//soma os numeros pares
+			if(m[i][j] % 2 == 0){
+				contapares++;
+				somapares = somapares + m[i][j];
+			}else{
+			//Soma os numeros impares
+				contaimpares++;
+				somaimpares = somaimpares + m[i][j];
+			}
+		}
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<10 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Calcula a media
+	mediapares = somapares/contapares;
+	mediaimpares = somaimpares/contaimpares;
+	//Saida de dados
+	printf("\nA media dos numeros pares foi: %5.2f\n",mediapares);
+	printf("\nA media dos numeros impares foi: %5.2f\n",mediaimpares);
+}
+
+int ex7()
+{	
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int m[5][5];
+	int l5[5];
+	int c4[5];
+	int ds[5];
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<5;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<5;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	for(int i=0; i<5 ;i++){
+		for(int j=0; j<5 ;j++){
+			if(i == 4)
+				l5[j] = m[i][j];
+			if(j == 3)
+				c4[i] = m[i][j];
+			if(i+j == 4)
+				ds[j] = m[i][j];
+		}
+	}
+	//Desenha a tabela (Antes)
+	printf("\nTabela (Antes): \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<5 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Troca linha dois pela cinco
+	for(int i=0; i<5 ;i++)
+		for(int j=0; j<5 ;j++)
+			if(i == 1)
+				m[i][j] = l5[j];
+	//Desenha a tabela troca 2 pela 5
+	printf("\n\nTabela troca linha 2 pela linha 5: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<5 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Coluna 2 recebe os valores da coluna 4
+	for(int i=0; i<5 ;i++)
+		for(int j=0; j<5 ;j++)
+			if(j == 1)
+				m[i][j] = c4[i];
+	//Desenha a tabela troca coluna 1 pela 4
+	printf("\n\nTabela coluna 2 recebe os valores da coluna 4: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<5 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Diagonal principal recebe os valores da diagonal secundaria
+	for(int i=0; i<5 ;i++)
+		for(int j=0; j<5 ;j++)
+			if(i == j)
+				m[i][j] = ds[j];
+	//Desenha a tabela troca da diagonal principal pela secundaria
+	printf("\n\nTabela troca da diagonal principal pela secundaria: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<5 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	printf("\n");
+}
+
+int ex8()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int m[5][5];
+	int SL[5];
+	int SC[5];
+	//Zera as variaveis
+	for(int i=0; i<5 ;i++){
+		SL[i] = 0;
+		SC[i] = 0; 
+	}
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<5;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<5;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<5 ;j++){
+			printf("%5d",m[i][j]);
+		}
+	}
+	//Soma os valoes das colunas com as linhas
+	for(int i=0; i<5 ;i++){
+		for(int j=0; j<5 ;j++){
+			SL[i] = SL[i] + m[i][j];
+			SC[j] = SC[j] + m[i][j];
+		}
+	}
+	for(int i=0; i<5 ;i++){
+		printf("\nA soma da linha %d e: %d\n",i+1,SL[i]);
+		printf("\nA soma da coluna %d e: %d\n",i+1,SC[i]);
+	}
+}
+
+int ex9()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	int m[3][3];
+	int v[3];
+	//Leitura do vetor
+	if(randonizar == 2){
+		for(int i=0; i<3 ;i++){
+			printf("\nDigite um numero para o local[%d]",i+1);
+			printf("\nread~user $ ");
+			scanf("%d",&v[i]);
+		}
+	}else{
+		for(int i=0; i<3 ;i++){
+			
+			v[i] = (rand()%99+1);
+		}
+	}
+	printf("Os valores do vetor: \n");
+	for(int i=0; i< 3; i++)
+		{
+			printf("\t%d\n",v[i]);
+		}	
+	//Desenha a tabela e a matriz recebe os valores do vetor
+	printf("\nTabela: \n");
+	for(int i=0; i<3 ;i++){
+		printf("\n");
+		for(int j=0; j<3 ;j++){
+			m[i][j] = v[j];
+			printf("%5d",m[i][j]);
+		}
+	}
+	printf("\n\n\n\n");
+	
+}
+
+int ex10()
+{
+	srand((unsigned)time(0));
+	//Pergunta se o usuario quer randonizar a matriz
+	int randonizar;
+	printf("Para facilitar a vida do usuario preguiça\n");
+	printf("Você deseja que os exercicios randonizem as matrizes? 1=SIM 2=NÃO\n");
+	scanf("%d",&randonizar);
+	//Variaveis
+	float m[5][6];
+	float m2[5][6];
+	float maior[5];
+	//Zera a variavel
+	for(int i=0; i<5 ;i++) maior[i] = 0;
+	//Leitura de dados
+	if(randonizar == 2){
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<6;j++){
+				printf("Digite o valor na matriz no local [%d][%d] : ",i+1,j+1);
+				printf("\nread~user $ ");
+				scanf("%d",&m[i][j]);
+				printf("\n");
+			}
+		}	
+	}else{
+		for(int i=0; i<5 ;i++){
+			for(int j=0;j<6;j++){
+				
+				m[i][j] = (rand()%99+1);
+			}
+		}
+	}
+	for(int i=0; i<5 ;i++){
+		for(int j=0; j<6 ;j++){
+			if(m[i][j] > maior[i]){
+				maior[i] = m[i][j];
+				printf("%f\n",maior[i]);
+			}
+		}
+	}
+	//Desenha a tabela
+	printf("\nTabela: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<6 ;j++){
+			m2[i][j] = m[i][j]/maior[i];
+			printf("%5.0f",m[i][j]);
+		}
+	}
+	//Desenha a tabela dividindo cada valor pelo maior de cada linha
+	printf("\n\nTabela: \n");
+	for(int i=0; i<5 ;i++){
+		printf("\n");
+		for(int j=0; j<6 ;j++){
+			printf("%5.2f",m2[i][j]);
+		}
+	}
+	printf("\n");
+}
+
+int fim()
+{
+	//About
+	printf("        \t         \t           |||||\n");
+	printf("        \t         \t       |||||   |||||	<=== Death Star\n");
+	printf("        \t         \t   |||||           |||||\n");
+	printf("        \t         \t       |||||   |||||\n");
+	printf("        \t         \t           |||||\n");
+	printf("May the Force be with you\n");
+	printf("*************************\n");
+	printf("\n\n\n\t\t\t+_+_+_+_+_+_+__+__+__+__+__+_+_\n\t\t\t_+__+_By: 'Sir' Arthur_+__+__+_\n\t\t\t+_+_+_+_+_+_+__+__+__+__+__+_+_\n\n\n");
+}
+
+int main()
+{
+	int escolha = 0;
+	int jogo = 1;
+	//Menu para escolha
+	do{
+		if(jogo == 1){
+			printf("\n\n");
+			printf("   ***********                                    **      **          \n");
+			printf("    *****                                        *  *    *  *         \n");
+			printf("       ***** *          *        *                      **    **      \n");
+			printf("    ******                                       **    *  *  *  *     \n");
+			printf("   ***********                                  *  *                  \n");
+			printf("                                            **             **         \n");
+			printf("                                           *  *   **      *  *    **  \n");
+			printf("                                                 *  *            *  *\n");
+		}
+		printf("============================================================================================\n");
+		printf("\t|\t\tDigte o valore referente a opcao:\t\t\t    | \n");
+		printf("\t| 1 (Maior valor acima da diagonal principal e soma da diagonal secundaria) | \n");
+		printf("\t| 2 (Soma elementos das linhas pares/impares de uma matriz 7x7)\t\t    | \n");
+		printf("\t| 3 (Calcula a media das colunas de uma matriz M[6][7])\t\t\t    |\n");
+		printf("\t| 4 (Calcula a media das linhas de uma matriz M[7][6])\t\t\t    |\n");
+		printf("\t| 5 (Calcula os valores acima da media em uma matriz M[5][10])\t\t    |\n");
+		printf("\t| 6 (Calcula a media dos numeros pares e impares em uma matriz M[5][5])\t    |\n");
+		printf("\t| 7 (Numa M[5][5]:(linha2=linha5),(coluna1=coluna4)e(diagonalp=diagonals))  |\n");
+		printf("\t| 8 (Soma as linhas e as colunas em uma matriz M[5][5])\t\t\t    |\n");
+		printf("\t| 9 (Le um vetor com 3 elementos e os preenche em uma matriz M[3][3])\t    |\n");
+		printf("\t| 10 (Le uma matriz M[5][6]) e divide os valores de cada linha pelo maior)  |\n");
+		printf("\t| 0 (Sai do programa ...)\t\t\t\t\t\t    |\n");
+		printf("============================================================================================\n");
+		printf("\nread~user $ ");
+		scanf("%d",&escolha);
+		jogo++;
+
+	    switch(escolha){
+	    case 0: fim(); return 0;
+        case 1: ex1(); break;
+        case 2: ex2(); break;
+        case 3: ex3(); break;
+        case 4: ex4(); break;
+        case 5: ex5(); break;
+        case 6: ex6(); break;
+        case 7: ex7(); break;
+        case 8: ex8(); break;
+        case 9: ex9(); break;
+        case 10: ex10(); break;
+        default: printf("\n\nOpcao invalida!!!\n\n"); continue;
+        }
+    }while(escolha != 0);
+
+    return 0;
+}
