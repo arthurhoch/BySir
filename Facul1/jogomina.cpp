@@ -68,18 +68,16 @@ int main()
 					Tabuleiro[i+1][j-1]++;
 				if(Tabuleiro[i-1][j+1] != 9)
 					Tabuleiro[i-1][j+1]++;
-
-
 			}
 		}
 	}
+	//Calcula a soma para finalizar o programa caso o usuario seja vitorioso no game
 	for (int i = 1; i < 6; i++){
 		for (int j = 1; j < 6; j++){
 			if(Tabuleiro[i][j] != 9)
 				soma = soma + Tabuleiro[i][j];
 		}
 	}
-
 	printf("\n\n*********************************************************\n");
 	printf("***Missão do dia preencha isso sem achar nenhuma bomba***\n");
 	printf("*********************************************************\n\n");
@@ -113,19 +111,41 @@ int main()
 		if (termina == 1)
 			return 0;
 		Numero_Coluna = 1;
+		//Estrada de dados
 		printf("\nDigite a localização que voce quer abrir: Ex linha 2 (enter), coluna 3 (enter) p/ 2,3 \n");
 		scanf("%d",&Local_Coluna);
 		scanf("%d",&Local_Linha);
 		printf("\n");
+		//Ativa a função SECRETA quando os numeros digitados forrem 99 e 99
 		if (Local_Linha == 99 && Local_Coluna == 99)
 			Funcao_secreta = 1;
+		//Informaoes do jogo localizacaso digitada e bombas a redor da localizacao digitada
 		printf("\n\tLocalização digitada [%d][%d]\n",Local_Linha,Local_Coluna);
 		if(Tabuleiro[Local_Linha][Local_Coluna] !=9)
 			printf("\tTendo %d bombas ao redor\n\n\n",Tabuleiro[Local_Linha][Local_Coluna]);
-
+		//Tabuleiro_esconde recebe o numero de bombas que existem ao seu redor
 		switch (Tabuleiro[Local_Linha][Local_Coluna]){
 			case 0:
 				Tabuleiro_Esconde[Local_Linha][Local_Coluna] = '0';
+				//Se não tiver nenhum bomba no local selecionado
+				//esse codigo busca na tabela locais ao redor
+				//por pontos aonde n tenham bombas
+				if(Tabuleiro[Local_Linha+1][Local_Coluna] == 0)
+					Tabuleiro_Esconde[Local_Linha+1][Local_Coluna] = '0';
+				if(Tabuleiro[Local_Linha][Local_Coluna+1] == 0)
+					Tabuleiro_Esconde[Local_Linha][Local_Coluna+1] = '0';
+				if(Tabuleiro[Local_Linha+1][Local_Coluna+1] == 0)
+					Tabuleiro_Esconde[Local_Linha+1][Local_Coluna+1] = '0';
+				if(Tabuleiro[Local_Linha-1][Local_Coluna] == 0)
+					Tabuleiro_Esconde[Local_Linha-1][Local_Coluna] = '0';
+				if(Tabuleiro[Local_Linha][Local_Coluna-1] == 0)
+					Tabuleiro_Esconde[Local_Linha][Local_Coluna-1] = '0';
+				if(Tabuleiro[Local_Linha-1][Local_Coluna-1] == 0)
+					Tabuleiro_Esconde[Local_Linha-1][Local_Coluna-1] = '0';
+				if(Tabuleiro[Local_Linha+1][Local_Coluna-1] == 0)
+					Tabuleiro_Esconde[Local_Linha+1][Local_Coluna-1] = '0';
+				if(Tabuleiro[Local_Linha-1][Local_Coluna+1] == 0)
+					Tabuleiro_Esconde[Local_Linha-1][Local_Coluna+1] = '0';
 				break;
 			case 1:
 				Tabuleiro_Esconde[Local_Linha][Local_Coluna] = '1';
@@ -155,7 +175,7 @@ int main()
 				break;
 		}
 		resultado = resultado + Tabuleiro[Local_Linha][Local_Coluna];
-		
+		//Mensagem final de vitoria ou derota no jogo
 		if (Tabuleiro[Local_Linha][Local_Coluna] == 9){
 			Tabuleiro_Esconde[Local_Linha][Local_Coluna] = 'B';
 			printf("\n\t\t\t Você perdeu HAHAHA!!!");
@@ -163,8 +183,17 @@ int main()
 			termina++;
 		}else if(soma == resultado){
 			printf("\n\n ** Parabens voce venceu na vida, ops no jogo! ** \n\n");
+			printf("\t\t    1   2   3   4   5\n");
+			printf("\t\t  ---------------------");
+			for (int i = 1; i < 6; i++){
+				printf("\n\t\t%d | ",Numero_Coluna);
+				Numero_Coluna++;
+				for (int j = 1; j < 6; j++){
+					printf("%c | ",Tabuleiro_Esconde[i][j]);
+				}
+			}
+		return 0;
 		}
-
 	}while(Local_Coluna > -1);	
 	return 0;
 }
